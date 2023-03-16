@@ -7,7 +7,7 @@ function Nav() {
     return (
         <Fragment>
             <MainNav className="nav">
-                <H1>Quack Quack</H1>
+                <H1>Quick Quack</H1>
                 <NavList>
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/profile">Account</NavLink>

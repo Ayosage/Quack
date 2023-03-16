@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {RegisterForm} from "./register.styles";
+import {RegContainer} from "../../routes/Register/register.styles";
 
 
 export default function Register(){
@@ -27,18 +28,24 @@ export default function Register(){
     }
 
     return(
-        <div>
+        <RegContainer>
         <RegisterForm action={"x"}>
-            <h1>Registration</h1>
-            <input type="text" name="fName" placeholder="First Name" value={firstName} onChange={(e)=>setFirstName(e.target.value)}/>
-            <input type="text" name="lName" placeholder="Last Name" value={lastName} onChange={(e)=>setLastName(e.target.value)}/>
-            <input type="text" name="username" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
-            <input type="text" name="email" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-            <input type="password" name="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
 
-            <input type="submit" value="Create Account" onClick={handleClick}/>
+            <h1>Registration</h1>
+            <div className="input-container">
+                <input type="text" name="fName" placeholder="First Name" value={firstName} onChange={(e)=>setFirstName(e.target.value)}/>
+                <input type="text" name="lName" placeholder="Last Name" value={lastName} onChange={(e)=>setLastName(e.target.value)}/>
+            </div>
+                <input type="text" name="username" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
+                <input type="text" name="email" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                <input type="password" name="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+
+
+
+
+            <input class="submit" type="submit" value="Create Account" onClick={handleClick}/>
 
         </RegisterForm>
-        </div>
+        </RegContainer>
     )
 }

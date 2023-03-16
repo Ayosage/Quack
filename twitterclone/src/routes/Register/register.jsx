@@ -5,10 +5,12 @@ import Nav from "../nav/nav";
 import Login from "../../component/form/login";
 import Register from "../../component/form/register";
 
-function Home() {
+function Registration() {
+    console.log("register");
     return (
         <Fragment>
 
+            <Nav/>
             <Register/>
 
             <Outlet />
@@ -16,4 +18,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Registration;
