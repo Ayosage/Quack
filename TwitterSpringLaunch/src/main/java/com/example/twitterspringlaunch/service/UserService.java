@@ -7,11 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface UserService {
 
 
-    User saveUser(User user);
-    List<User> getAllUsers();
-
-    void deleteUser(int id);
+    public User saveUser(User user);
+    public List<User> getAllUsers();
 }
