@@ -12,10 +12,19 @@ export const Card = styled.div`
   height: auto;
   border-radius: 10px;
   margin-top: 10px;
+  box-shadow: 0px 1px 2px black;
+  border: 2px solid ${green};
+  
+  
 `
 export const UserContainer = styled.div`
   display: flex;
   align-items: end;
+  
+  .handle{
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
 `
 
 
@@ -29,13 +38,20 @@ export const ProfilePicture = styled.div`
 
 export const ContentContainer = styled.div`
   width: 100%;
-  margin: 5px 10px 5px 10px;
+
+  
 `
 export const QuackContent = styled.h3`
-  padding-left: 20px;
+  text-align: left;
+  
+ padding: 10px 5px 10px 5px;
+  margin: 1rem 50px 1rem 50px ;
+  font-weight: 300;
 `
 export const IconContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  padding-bottom: 10px;
+ 
 `
