@@ -37,28 +37,21 @@ public class TweetServiceImpl implements TweetService{
 	@Override
 	public List<Tweet> getAllTweets() {
 		log.info("Inside getAllTweets");
-		/**
-		 * Connection conn
-		 * Statement st = conn.createStatement(""):
-		 * ResultSet rs = st.getResultList()
-		 * List<Tweet> list = new ArrayList()
-		 * while(rs.next(){
-		 * 	int id = 	rs.getOBject("tweet_id");
-		 *   Strign contnet  =		rs.getOBject("content");
-	 	* 		String username = 	rs.getOBject("username");
-	 	* 
-	 	* 		Tweet tw = new Tweet();
-	 	* 		list.add(tw);
-	 	* 
-	 	* 
-		 * }
-		 * 
-		 * return list;
-		 * 
-		 */
+		
 		List<Tweet> allTweet = tweetRepository.findAll();
 		log.info("finally returning tweet:{}",allTweet);
 		return allTweet;
 	}
-
+	@Override
+	public Tweet updateTweet(Tweet tweet,int id) {
+		log.info("updateTweet came");
+		
+		
+		
+		tweetRepository.save(tweet);
+		log.info("updateTweet done");
+		return tweet;
+		
+	}
+	
 }

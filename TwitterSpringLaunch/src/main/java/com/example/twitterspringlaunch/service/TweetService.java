@@ -11,4 +11,6 @@ public interface TweetService {
 	boolean deleteTweetById(int tweetId);
 	
 	List<Tweet> getAllTweets();
+	
+	Tweet updateTweet(Tweet tweet,int id);
 }
