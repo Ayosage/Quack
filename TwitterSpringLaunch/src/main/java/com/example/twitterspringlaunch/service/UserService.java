@@ -16,7 +16,6 @@ public interface UserService {
     List<User> getAllUsers();
     void deleteUser(int id);
     User updateUser(User user, String username);
-
     boolean login(String username, String password, HttpServletRequest request);
     boolean logout(HttpServletRequest request);
 

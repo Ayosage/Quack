@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean login(String username, String password, HttpServletRequest request) {
         User user = userRepository.findByUsername(username);
-        if (user != null && user.getUsername().equals(username)) {
+        if (user != null && user.getUsername().equals(username) && user.getPassword().equals(password)) {
             request.getSession().setAttribute("user", user);
             return true;
         } else {

@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -44,24 +46,43 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user, HttpServletRequest request, Model model){
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> login(@RequestBody User user, HttpServletRequest request){
         boolean loggedIn = userService.login(user.getUsername(), user.getPassword(), request);
         if (loggedIn){
-            return "redirect:/home";
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("redirect", "/home");
+
+            return ResponseEntity.ok(response);
         }else {
-            model.addAttribute("error", "Invalid login credentials");
-            return "login";
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("error", "Invalid login credentials");
+
+            return ResponseEntity.badRequest().body(response);
         }
     }
 
+
     @PostMapping("/logout")
-    public String logout(HttpServletRequest request, Model model){
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> logout(HttpServletRequest request){
         boolean loggedOut = userService.logout(request);
         if(loggedOut){
-            model.addAttribute("message", "You have been logged out.");
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("message", "You have been logged out.");
+
+            return ResponseEntity.ok(response);
         }else{
-            model.addAttribute("error", "You are not signed in.");
+            // Create a JSON object with an error message
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("error", "You are not signed in.");
+
+            return ResponseEntity.badRequest().body(response);
         }
-        return "login";
     }
+
 }
