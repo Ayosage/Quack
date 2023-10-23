@@ -1,14 +1,27 @@
-import {Fragment} from "react";
+import {Fragment, useContext} from "react";
 import {MainNav, NavLink, NavList} from "../nav/nav.styles";
 import {Outlet} from "react-router-dom";
 import Feed from "../../component/feed/feed";
-import {GridContainer, Menu, MenuItem, SearchBar} from "./dashboard.styles";
-import Nav from "../nav/nav";
+import {GridContainer,SearchBar} from "./dashboard.styles";
+
+import TweetFloat from "../../component/float/TweetFloat";
+import {UserContext} from "../../App";
+import MenuNav from "../nav/menuNav";
+import ProfileComponentSmall from "../../component/profile-component/profile.component";
+import {HR} from "../profile/profile.styles";
+import ExploreComponent from "../../component/explore.component/explore.component";
+
+
+
 
 function Dashboard() {
 
+    const [user, setUser]= useContext(UserContext);
+    console.log(user)
     return (
         <Fragment>
+
+
 
             <SearchBar>
                 
@@ -16,28 +29,34 @@ function Dashboard() {
             </SearchBar>
 
             <GridContainer className="dash-container-grid">
+                <div>
+                    <ProfileComponentSmall user={user}/>
 
-                <Menu>
-                    <MenuItem > <a href="#">Profile </a></MenuItem>
-                    <MenuItem > <a>Explore </a> </MenuItem>
-                    <MenuItem > <a>Settings </a> </MenuItem>
-                    <MenuItem > <a>Account </a> </MenuItem>
-                    <MenuItem > <a>Free Money </a> </MenuItem>
-                </Menu>
+
+
+                   <MenuNav/>
+                </div>
+
 
 
 
                 <Feed/>
 
-                <Menu>
-                    <MenuItem> Profile </MenuItem>
-                    <MenuItem >Explore </MenuItem>
-                    <MenuItem >Settings </MenuItem>
-                    <MenuItem >BoopDoop </MenuItem>
-                    <MenuItem >SnoopWoop </MenuItem>
-                </Menu>
+              <div>
+
+                  <div>
+                      <h2>Users you might know</h2>
+                      <HR/>
+
+                      <div>
+                        <ExploreComponent/>
+                      </div>
+                  </div>
+              </div>
 
             </GridContainer>
+
+            <Outlet/>
         </Fragment>
     );
 }

@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {RegisterForm} from "./register.styles";
-import {RegContainer} from "../../routes/Register/register.styles";
+import {RegContainer} from "../../routes/register/register.styles";
+import {useNavigate} from "react-router-dom";
 
 
 export default function Register(){
@@ -10,7 +11,7 @@ export default function Register(){
     const[firstName, setFirstName] = useState('');
     const[lastName, setLastName] = useState('');
     const[email, setEmail] = useState('');
-
+    const navigate = useNavigate();
 
 
     const handleClick=(e)=>{
@@ -19,10 +20,10 @@ export default function Register(){
         console.log(user);
         fetch("http://localhost:8080/user/add",{
             method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(user)
+            headers:{"Content-Type": "application/json"},
+            body:JSON.stringify(user),
         }).then(() =>{
-            console.log("New Student Added")
+            navigate("/")
         })
 
     }
@@ -43,7 +44,7 @@ export default function Register(){
 
 
 
-            <input class="submit" type="submit" value="Create Account" onClick={handleClick}/>
+            <input className="submit" type="submit" value="Create Account" onClick={handleClick}/>
 
         </RegisterForm>
         </RegContainer>

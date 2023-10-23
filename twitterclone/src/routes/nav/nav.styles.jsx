@@ -29,6 +29,29 @@ export const NavLink = styled(Link)`
   color: ${white};
   text-decoration: none;
   margin: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+
+  :after{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    background-color: ${white};
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: -1.5rem;
+    border-radius: 50%;
+
+    transition: all 0.2s ease-in-out;
+  }
+
+  :hover:after{
+    height: 0.5rem;
+    width: 0.5rem;
+  }
+  
     `
 
 export const H1 = styled.h1`

@@ -13,5 +13,7 @@ public interface UserService {
     User saveUser(User user);
     List<User> getAllUsers();
 
+    User getUserAuth(String username);
+
     void deleteUser(int id);
 }

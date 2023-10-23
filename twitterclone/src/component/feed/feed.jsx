@@ -1,24 +1,34 @@
 import QuackCard from "../card/quack-card";
-import {Fragment} from "react";
+import {Fragment, useEffect, useState} from "react";
 
 
 function Feed(){
+    const [tweets, setTweets] = useState(null)
+    useEffect(() => {
+        fetch("http://localhost:8080/tweet/getAll")
+            .then(response => {
+                if(response.ok){
+                    console.log(response)
+                    return response.json()
+                }
+            }).then(data => {
+            console.log(data)
 
-    let list = [
-        {id:"41",handle:"@Tommy", content:"Quick Quack"},{id:"1",handle:"@PPpoopoo", content:"Quack Quack"}, {id:"2",handle:"@BigDaddyWarbucks", content:"I hate Kids & Fun"}, {id:"3",handle:"@Almo", content:"More than great Sabiha"}, {id:"3",handle:"@Nick", content:"Every question you ask me, $20, go ahead ask me more questions, especially on the test, I know all about this stuff. $20"}
-    ];
+            setTweets(data.reverse())
+        })
+            .catch(error => console.log(error))
+    }, [])
+
+
 
     return(
         <Fragment>
             <div>
-            {list && list.map((tweet) => ( <QuackCard key={tweet.id} handle={tweet.handle} content={tweet.content} />))}
+                {tweets && tweets.map(({id, username, content})=> <QuackCard key={id} id={id} handle={username} content={content}/>)}
             </div>
         </Fragment>
     )
-
-
 }
-
 export default Feed;
 
 

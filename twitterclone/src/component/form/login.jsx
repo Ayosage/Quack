@@ -1,21 +1,35 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Form} from "./login.styles";
+import {UserContext} from "../../App";
+import {useNavigate} from "react-router-dom";
+
 
 function Login() {
+    const [user, setUser] = useContext(UserContext);
     const[username, setUsername] = useState('');
     const[password, setPassword] = useState('');
-
+    const navigate = useNavigate();
     const handleClick=(e)=>{
         e.preventDefault()
-        const user={username,password};
-        console.log(user);
-        {/* below is where you need to add the path for authentication /auth is api endpoint*/}
-        fetch("http://localhost:8080/user/auth",{
+        const authUser={username,password};
+
+
+        fetch("http://localhost:8080/user/auth", {
             method:"POST",
             headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(user)
-        }).then(() =>{
-            console.log("New Student Added")
+            body:JSON.stringify(authUser)
+        }).then((response) =>{
+
+            return response.json()
+        }).then(data => {
+            console.log(data)
+            if(username.toLowerCase() === data.username.toLowerCase() && password === data.password){
+                setUser(data)
+                navigate("/dashboard")
+            }
+            else{
+                console.log("credentials dont match")
+            }
         })
 
     }
@@ -24,8 +38,8 @@ function Login() {
             <Form action={"x"}>
                 <h1>Login</h1>
                 <div>
-                    <input type={"text"} name={"username"} value={username} onChange={(e)=>setUsername(e.target.value)}/>
-                    <input type={"password"} name={"password"} value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                    <input type={"text"} name={"username"} placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
+                    <input type={"password"} name={"password"} placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 </div>
 
                 {/* change font size and  maybe font family*/}
